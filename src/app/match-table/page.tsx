@@ -51,7 +51,7 @@ export default function MatchTablePage() {
                     {r.location}
                   </CardCaption>
                   <div className="mt-1.5">
-                    <ContentBadge size="xsmall" variant="solid" color="accent" accentColor={r.matchScore >= 90 ? "atomic.green.60" : "atomic.purple.50"}>
+                    <ContentBadge size="xsmall" variant="solid" color="accent" accentColor={r.matchScore >= 90 ? "atomic.green.60" : "atomic.orange.50"}>
                       입맛 매칭률 {r.matchScore}%
                     </ContentBadge>
                   </div>
@@ -104,7 +104,7 @@ export default function MatchTablePage() {
                     {r.location}
                   </CardCaption>
                   <div className="mt-1.5">
-                    <ContentBadge size="xsmall" variant="solid" color="accent" accentColor={r.matchScore >= 90 ? "atomic.green.60" : "atomic.purple.50"}>
+                    <ContentBadge size="xsmall" variant="solid" color="accent" accentColor={r.matchScore >= 90 ? "atomic.green.60" : "atomic.orange.50"}>
                       입맛 매칭률 {r.matchScore}%
                     </ContentBadge>
                   </div>

@@ -1,4 +1,5 @@
 import { Typography, Card, CardThumbnail, CardTitle, CardCaption } from "@montage-ui/core";
+import { IconChevronRight } from "@montage-ui/icon";
 import { themeCategories } from "@/data/mock";
 
 export default function ThemeCardSection() {
@@ -8,9 +9,12 @@ export default function ThemeCardSection() {
         <Typography variant="heading2" weight="bold">
           테마로 찾는 맛집
         </Typography>
-        <Typography variant="caption1" color="semantic.label.assistive" style={{ cursor: "pointer" }}>
-          전체 보기 &gt;
-        </Typography>
+        <div className="group flex items-center gap-0.5 cursor-pointer transition-colors">
+          <Typography variant="caption1" color="semantic.label.assistive" className="group-hover:!text-[var(--semantic-label-alternative)] transition-colors">
+            전체 보기
+          </Typography>
+          <IconChevronRight width={14} height={14} className="text-[var(--semantic-label-assistive)] group-hover:text-[var(--semantic-label-alternative)] transition-colors" />
+        </div>
       </div>
       <div className="grid grid-cols-4 gap-4">
         {themeCategories.map((theme) => (

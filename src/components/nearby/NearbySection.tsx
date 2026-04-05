@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Typography, Avatar, ContentBadge } from "@montage-ui/core";
+import { IconChevronRight } from "@montage-ui/icon";
 import { nearbyRestaurants, areaOptions, type Area } from "@/data/mock";
 
 export default function NearbySection() {
@@ -33,10 +34,11 @@ export default function NearbySection() {
           </span>
         </div>
         <div className="flex-1" />
-        <div className="flex items-center gap-1">
-          <Typography variant="caption1" color="semantic.label.assistive" style={{ cursor: "pointer" }}>
-            전체 보기 &gt;
+        <div className="group flex items-center gap-0.5 cursor-pointer transition-colors">
+          <Typography variant="caption1" color="semantic.label.assistive" className="group-hover:!text-[var(--semantic-label-alternative)] transition-colors">
+            전체 보기
           </Typography>
+          <IconChevronRight width={14} height={14} className="text-[var(--semantic-label-assistive)] group-hover:text-[var(--semantic-label-alternative)] transition-colors" />
         </div>
       </div>
 

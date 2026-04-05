@@ -10,6 +10,7 @@ import {
   MessageSquare,
   User,
   GripVertical,
+  UserCircle,
 } from "lucide-react";
 
 // ─── 협업 메모 타입 ───
@@ -21,11 +22,24 @@ interface CollabNote {
   badge?: "important" | "info";
 }
 
+// ─── 팀 노트 작성자 설정 ───
+// 에이전트가 팀 노트를 추가할 때 이 값을 사용한다.
+// 값이 비어 있으면 에이전트는 사용자에게 이름을 물어본 뒤 여기에 설정해야 한다.
+const DEFAULT_AUTHOR = "유정";
+
 // 메모 데이터 (최신순)
 const collabNotes: CollabNote[] = [
   {
+    id: "4",
+    author: DEFAULT_AUTHOR,
+    message:
+      "입맛 프로필 페이지 추가. /match-table/taste-profile 경로로 접근 가능.",
+    timestamp: "26/04/05(토) 오후",
+    badge: "info",
+  },
+  {
     id: "3",
-    author: "유정",
+    author: DEFAULT_AUTHOR,
     message:
       "Match Table 메인 페이지 구현 완료. 원티드 홈페이지 구조 기반으로 GNB, 퀵메뉴, 카드 캐러셀, 매거진, 테마, 근처 맛집 섹션 구성.",
     timestamp: "26/04/05(토) 오후",
@@ -33,7 +47,7 @@ const collabNotes: CollabNote[] = [
   },
   {
     id: "2",
-    author: "유정",
+    author: DEFAULT_AUTHOR,
     message:
       "랜딩 허브 페이지 추가. 기존 패턴 기반으로 프로토타입 진입점 구성.",
     timestamp: "26/04/05(토) 오후",
@@ -41,7 +55,7 @@ const collabNotes: CollabNote[] = [
   },
   {
     id: "1",
-    author: "유정",
+    author: DEFAULT_AUTHOR,
     message:
       "Match Table 프로젝트 시작. Montage UI + Next.js 16 기반 프로토타이핑 환경 세팅 완료.",
     timestamp: "26/04/05(토) 오전",
@@ -350,6 +364,13 @@ export default function LandingPage() {
                     title="메인 페이지"
                     description="Match Table 메인 페이지"
                     onClick={() => window.open("/match-table", "_blank")}
+                    variant="default"
+                  />
+                  <EntryButton
+                    icon={<UserCircle className="w-4 h-4 text-blue-600" />}
+                    title="입맛 프로필"
+                    description="사용자 입맛 프로필 페이지"
+                    onClick={() => window.open("/match-table/taste-profile", "_blank")}
                     variant="default"
                   />
                 </div>

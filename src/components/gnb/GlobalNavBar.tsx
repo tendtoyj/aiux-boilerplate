@@ -20,6 +20,7 @@ export default function GlobalNavBar() {
                   variant="body1"
                   weight="medium"
                   color="semantic.label.assistive"
+                  className="transition-colors duration-200 hover:!text-gray-800"
                   style={{ cursor: "pointer", whiteSpace: "nowrap" }}
                 >
                   {item}

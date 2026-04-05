@@ -2,14 +2,22 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useChat } from "@ai-sdk/react";
-import { MessageCircle, X, Send } from "lucide-react";
+import { MessageCircle, X, Send, Settings } from "lucide-react";
 import ChatMessage from "./ChatMessage";
+import {
+  defaultToolConfig,
+  toolLabels,
+  type ToolConfig,
+} from "@/lib/tools/tool-config";
 
-const GREETING = "안녕하세요! Match Table AI 어시스턴트입니다. 무엇을 도와드릴까요?";
+const GREETING =
+  "안녕하세요! Match Table AI 어시스턴트입니다. 무엇을 도와드릴까요?";
 
 export default function FloatingChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
+  const [showSettings, setShowSettings] = useState(false);
+  const [toolConfig, setToolConfig] = useState<ToolConfig>(defaultToolConfig);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const { messages, sendMessage, status } = useChat();
@@ -22,8 +30,12 @@ export default function FloatingChat() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isStreaming) return;
-    sendMessage({ text: input });
+    sendMessage({ text: input }, { body: { toolConfig } });
     setInput("");
+  };
+
+  const toggleTool = (key: keyof ToolConfig) => {
+    setToolConfig((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
   return (
@@ -39,13 +51,51 @@ export default function FloatingChat() {
               </h3>
               <p className="text-xs text-gray-400">Match Table 도우미</p>
             </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="w-7 h-7 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors cursor-pointer"
-            >
-              <X className="w-4 h-4" />
-            </button>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => setShowSettings((prev) => !prev)}
+                className={`w-7 h-7 rounded-full flex items-center justify-center transition-colors cursor-pointer ${
+                  showSettings
+                    ? "bg-blue-100 text-blue-600"
+                    : "text-gray-400 hover:bg-gray-100 hover:text-gray-600"
+                }`}
+              >
+                <Settings className="w-3.5 h-3.5" />
+              </button>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="w-7 h-7 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
           </div>
+
+          {/* Tool Toggle Panel */}
+          {showSettings && (
+            <div className="px-4 py-2.5 border-b border-gray-100 bg-gray-50">
+              <p className="text-[10px] font-medium text-gray-400 mb-1.5">
+                도구 설정
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                {(Object.keys(toolConfig) as (keyof ToolConfig)[]).map(
+                  (key) => (
+                    <button
+                      key={key}
+                      onClick={() => toggleTool(key)}
+                      className={`text-[11px] px-2.5 py-1 rounded-full border transition-colors cursor-pointer ${
+                        toolConfig[key]
+                          ? "bg-blue-50 border-blue-200 text-blue-600"
+                          : "bg-white border-gray-200 text-gray-400"
+                      }`}
+                    >
+                      {toolLabels[key]}
+                    </button>
+                  )
+                )}
+              </div>
+            </div>
+          )}
 
           {/* Messages */}
           <div className="flex-1 overflow-y-auto p-4 space-y-3">

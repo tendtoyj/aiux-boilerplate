@@ -5,7 +5,7 @@ const menuItems = ["탐색", "나의 맛집", "매거진", "피드", "입맛 프
 
 export default function GlobalNavBar() {
   return (
-    <header className="sticky top-0 z-50 bg-white">
+    <header className="sticky top-0 z-50 bg-[var(--semantic-background-transparent-alternative)] backdrop-blur-md">
       <div className="max-w-[1060px] mx-auto px-6">
         <FlexBox justifyContent="space-between" alignItems="center" style={{ height: 64 }}>
           {/* Left: Logo + Menu */}

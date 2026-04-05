@@ -30,23 +30,19 @@ export interface ThemeCategory {
 export interface QuickMenuItem {
   id: string;
   label: string;
-  iconName: string;
+  icon: string;
   color: string;
 }
 
 // ─── Quick Menu Items ───
 
 export const quickMenuItems: QuickMenuItem[] = [
-  { id: "1", label: "맛집 찾기", iconName: "search", color: "#3B82F6" },
-  { id: "2", label: "입맛 분석", iconName: "star", color: "#F59E0B" },
-  { id: "3", label: "리뷰 관리", iconName: "pencil", color: "#10B981" },
-  { id: "4", label: "예약 조회", iconName: "calendar", color: "#8B5CF6" },
-  { id: "5", label: "예약 현황", iconName: "list", color: "#EC4899" },
-  { id: "6", label: "맞춤 추천", iconName: "like", color: "#EF4444" },
-  { id: "7", label: "할인·쿠폰", iconName: "tag", color: "#F97316" },
-  { id: "8", label: "북마크", iconName: "bookmark", color: "#6366F1" },
-  { id: "9", label: "지역별 맛집", iconName: "location", color: "#14B8A6" },
-  { id: "10", label: "에디터 추천", iconName: "coffee", color: "#D946EF" },
+  { id: "1", label: "맛집 찾기", icon: "finder", color: "#3B82F6" },
+  { id: "2", label: "입맛 분석", icon: "dna", color: "#F59E0B" },
+  { id: "4", label: "예약 조회", icon: "booking", color: "#8B5CF6" },
+  { id: "7", label: "할인·쿠폰", icon: "coupon", color: "#F97316" },
+  { id: "10", label: "에디터 추천", icon: "coffee", color: "#D946EF" },
+  { id: "11", label: "맛집 랭킹", icon: "chart", color: "#06B6D4" },
 ];
 
 // ─── Trending Restaurants (지금 뜨는 맛집) ───

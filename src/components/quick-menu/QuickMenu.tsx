@@ -1,29 +1,21 @@
+import Image from "next/image";
 import { FlexBox, Typography } from "@montage-ui/core";
-import {
-  IconSearch,
-  IconStarFill,
-  IconPencil,
-  IconCalendar,
-  IconList,
-  IconLikeFill,
-  IconTag,
-  IconBookmarkFill,
-  IconLocationFill,
-  IconCoffeeFill,
-} from "@montage-ui/icon";
 import { quickMenuItems } from "@/data/mock";
+import finderIcon from "@/assets/finder.png";
+import dnaIcon from "@/assets/dna.png";
+import bookingIcon from "@/assets/booking.png";
+import couponIcon from "@/assets/coupon.png";
+import coffeeIcon from "@/assets/coffee.png";
+import chartIcon from "@/assets/chart.png";
+import type { StaticImageData } from "next/image";
 
-const iconMap: Record<string, React.ReactNode> = {
-  search: <IconSearch width={28} height={28} />,
-  star: <IconStarFill width={28} height={28} />,
-  pencil: <IconPencil width={28} height={28} />,
-  calendar: <IconCalendar width={28} height={28} />,
-  list: <IconList width={28} height={28} />,
-  like: <IconLikeFill width={28} height={28} />,
-  tag: <IconTag width={28} height={28} />,
-  bookmark: <IconBookmarkFill width={28} height={28} />,
-  location: <IconLocationFill width={28} height={28} />,
-  coffee: <IconCoffeeFill width={28} height={28} />,
+const iconMap: Record<string, StaticImageData> = {
+  finder: finderIcon,
+  dna: dnaIcon,
+  booking: bookingIcon,
+  coupon: couponIcon,
+  coffee: coffeeIcon,
+  chart: chartIcon,
 };
 
 export default function QuickMenu() {
@@ -31,23 +23,23 @@ export default function QuickMenu() {
     <section className="py-8">
       <FlexBox justifyContent="center" gap={16} flexWrap="wrap">
         {quickMenuItems.map((item) => (
-          <FlexBox
+          <div
             key={item.id}
-            flexDirection="column"
-            alignItems="center"
-            gap={8}
-            style={{ width: 80, cursor: "pointer" }}
+            className="flex flex-col items-center gap-2 rounded-2xl px-4 py-3 cursor-pointer transition-colors hover:bg-gray-100"
+            style={{ width: 100 }}
           >
-            <div
-              className="w-14 h-14 rounded-2xl flex items-center justify-center"
-              style={{ backgroundColor: `${item.color}15`, color: item.color }}
-            >
-              {iconMap[item.iconName]}
+            <div className="w-14 h-14 flex items-center justify-center">
+              <Image
+                src={iconMap[item.icon]}
+                alt={item.label}
+                width={48}
+                height={48}
+              />
             </div>
             <Typography variant="caption1" weight="medium" color="semantic.label.alternative" align="center">
               {item.label}
             </Typography>
-          </FlexBox>
+          </div>
         ))}
       </FlexBox>
     </section>

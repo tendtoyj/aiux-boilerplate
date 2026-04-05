@@ -50,7 +50,7 @@ export default function NearbySection() {
             className="flex items-center gap-4 px-4 py-3.5 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors"
           >
             <Avatar size="large" variant="company" src={restaurant.imageUrl} alt={restaurant.name} />
-            <div className="flex-1 min-w-0 flex flex-col gap-1">
+            <div className="flex-1 min-w-0 flex flex-col gap-0.5">
               <Typography variant="body1" weight="bold" noWrap>
                 {restaurant.name}
               </Typography>

@@ -44,7 +44,7 @@ export default function QuickMenu() {
             >
               {iconMap[item.iconName]}
             </div>
-            <Typography variant="caption1" weight="medium" color="semantic.label.assistive" align="center">
+            <Typography variant="caption1" weight="medium" color="semantic.label.alternative" align="center">
               {item.label}
             </Typography>
           </FlexBox>

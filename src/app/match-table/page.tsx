@@ -34,16 +34,11 @@ export default function MatchTablePage() {
                   />
                   {r.discount && (
                     <div className="absolute top-2 left-2">
-                      <ContentBadge size="small" variant="solid" color="accent">
+                      <ContentBadge size="small" variant="solid" color="accent" style={{ background: "none", color: "var(--semantic-inverse-label)" }}>
                         {r.discount}
                       </ContentBadge>
                     </div>
                   )}
-                  <div className="absolute top-2 right-2">
-                    <ContentBadge size="small" variant="solid" color="neutral">
-                      내 입맛 적합도 {r.matchScore}%
-                    </ContentBadge>
-                  </div>
                 </CardThumbnail>
                 <div className="p-3">
                   <CardTitle variant="body2" weight="bold">
@@ -55,6 +50,11 @@ export default function MatchTablePage() {
                   <CardCaption variant="caption2" color="semantic.label.assistive" className="mt-0.5">
                     {r.location}
                   </CardCaption>
+                  <div className="mt-1.5">
+                    <ContentBadge size="xsmall" variant="solid" color="accent" accentColor={r.matchScore >= 90 ? "atomic.green.60" : "atomic.purple.50"}>
+                      입맛 매칭률 {r.matchScore}%
+                    </ContentBadge>
+                  </div>
                 </div>
               </Card>
             </div>
@@ -87,16 +87,11 @@ export default function MatchTablePage() {
                   />
                   {r.discount && (
                     <div className="absolute top-2 left-2">
-                      <ContentBadge size="small" variant="solid" color="accent">
+                      <ContentBadge size="small" variant="solid" color="accent" style={{ background: "none", color: "var(--semantic-inverse-label)" }}>
                         {r.discount}
                       </ContentBadge>
                     </div>
                   )}
-                  <div className="absolute top-2 right-2">
-                    <ContentBadge size="small" variant="solid" color="accent">
-                      NEW
-                    </ContentBadge>
-                  </div>
                 </CardThumbnail>
                 <div className="p-3">
                   <CardTitle variant="body2" weight="bold">
@@ -108,6 +103,11 @@ export default function MatchTablePage() {
                   <CardCaption variant="caption2" color="semantic.label.assistive" className="mt-0.5">
                     {r.location}
                   </CardCaption>
+                  <div className="mt-1.5">
+                    <ContentBadge size="xsmall" variant="solid" color="accent" accentColor={r.matchScore >= 90 ? "atomic.green.60" : "atomic.purple.50"}>
+                      입맛 매칭률 {r.matchScore}%
+                    </ContentBadge>
+                  </div>
                 </div>
               </Card>
             </div>

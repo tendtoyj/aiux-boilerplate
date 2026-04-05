@@ -71,7 +71,6 @@ export const trendingRestaurants: Restaurant[] = [
     rating: 4.6,
     imageUrl: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400&h=300&fit=crop",
     matchScore: 92,
-    discount: "런치 세트 15% 할인",
     tags: ["파스타", "브런치"],
   },
   {
@@ -82,6 +81,7 @@ export const trendingRestaurants: Restaurant[] = [
     rating: 4.7,
     imageUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop",
     matchScore: 89,
+    discount: "첫 예약 20% 할인",
     tags: ["한우", "회식"],
   },
   {

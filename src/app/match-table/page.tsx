@@ -10,7 +10,7 @@ import { trendingRestaurants, newRestaurants } from "@/data/mock";
 
 export default function MatchTablePage() {
   return (
-    <div className="min-h-screen bg-[#F7F7F7]">
+    <div className="min-h-screen bg-white">
       <GlobalNavBar />
 
       <main className="max-w-[1060px] mx-auto px-6">

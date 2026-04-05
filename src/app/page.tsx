@@ -11,6 +11,7 @@ import {
   User,
   GripVertical,
   UserCircle,
+  BotMessageSquare,
 } from "lucide-react";
 
 // ─── 협업 메모 타입 ───
@@ -29,6 +30,14 @@ const DEFAULT_AUTHOR = "유정";
 
 // 메모 데이터 (최신순)
 const collabNotes: CollabNote[] = [
+  {
+    id: "5",
+    author: DEFAULT_AUTHOR,
+    message:
+      "AI 채팅 기능 추가. Vercel AI SDK 기반 플로팅 채팅 컴포넌트.",
+    timestamp: "26/04/05(토) 오후",
+    badge: "info",
+  },
   {
     id: "4",
     author: DEFAULT_AUTHOR,
@@ -296,6 +305,7 @@ const CollabNotesPanel: React.FC<{
 export default function LandingPage() {
   const [panelWidth, setPanelWidth] = useState(320);
 
+
   return (
     <div className="h-screen w-full bg-gradient-to-b from-gray-50 to-white text-gray-900 font-sans flex overflow-hidden">
       {/* Left Panel - Collaboration Notes */}
@@ -373,6 +383,13 @@ export default function LandingPage() {
                     onClick={() => window.open("/match-table/taste-profile", "_blank")}
                     variant="default"
                   />
+                  <EntryButton
+                    icon={<BotMessageSquare className="w-4 h-4 text-blue-600" />}
+                    title="AI 채팅"
+                    description="플로팅 AI 채팅 어시스턴트"
+                    onClick={() => window.open("/ai-chat", "_blank")}
+                    variant="default"
+                  />
                 </div>
               </div>
 
@@ -402,6 +419,7 @@ export default function LandingPage() {
           </div>
         </div>
       </div>
+
     </div>
   );
 }

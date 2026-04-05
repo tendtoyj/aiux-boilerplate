@@ -29,7 +29,7 @@ export default function GlobalNavBar() {
           </FlexBox>
 
           {/* Right: Icons + Avatar */}
-          <FlexBox alignItems="center" gap={8}>
+          <FlexBox alignItems="center" gap={16}>
             <IconButton variant="normal" size="medium">
               <IconSearch />
             </IconButton>

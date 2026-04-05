@@ -43,32 +43,28 @@ export default function NearbySection() {
       </div>
 
       {/* Grid list */}
-      <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+      <div className="grid grid-cols-2 gap-x-8 gap-y-2">
         {filtered.map((restaurant) => (
           <div
             key={restaurant.id}
-            className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+            className="flex items-center gap-4 px-4 py-3.5 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors"
           >
-            <Avatar size="large" variant="company">
-              <img
-                src={restaurant.imageUrl}
-                alt={restaurant.name}
-                className="w-full h-full object-cover rounded-lg"
-              />
-            </Avatar>
-            <div className="flex-1 min-w-0">
+            <Avatar size="large" variant="company" src={restaurant.imageUrl} alt={restaurant.name} />
+            <div className="flex-1 min-w-0 flex flex-col gap-1">
               <Typography variant="body1" weight="bold" noWrap>
                 {restaurant.name}
               </Typography>
-              <Typography variant="caption1" color="semantic.label.assistive" className="mt-0.5">
-                {restaurant.category}
-              </Typography>
-              <Typography variant="caption2" color="semantic.label.assistive" className="mt-0.5">
-                {restaurant.location}
-              </Typography>
+              <div className="flex items-center gap-1">
+                <Typography variant="caption1" color="semantic.label.assistive">
+                  {restaurant.category}
+                </Typography>
+                <Typography variant="caption2" color="semantic.label.assistive">
+                  · {restaurant.location}
+                </Typography>
+              </div>
             </div>
-            <ContentBadge size="small" color="neutral">
-              적합도 {restaurant.matchScore}%
+            <ContentBadge size="small" color={restaurant.matchScore >= 93 ? "blue" : restaurant.matchScore >= 90 ? "green" : "neutral"}>
+              예약률 {restaurant.matchScore}%
             </ContentBadge>
           </div>
         ))}

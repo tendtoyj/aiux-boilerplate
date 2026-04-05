@@ -63,7 +63,7 @@ export default function NearbySection() {
                 </Typography>
               </div>
             </div>
-            <ContentBadge size="small" color={restaurant.matchScore >= 93 ? "blue" : restaurant.matchScore >= 90 ? "green" : "neutral"}>
+            <ContentBadge size="small" color={restaurant.matchScore >= 90 ? "accent" : "neutral"}>
               예약률 {restaurant.matchScore}%
             </ContentBadge>
           </div>

@@ -68,7 +68,7 @@ export const showRestaurant = tool({
       .optional()
       .describe("분위기/상황 (예: 혼밥, 데이트, 회식)"),
   }),
-  execute: async ({ category, location, mood }) => {
+  execute: async ({ category }) => {
     // 카테고리로 필터링, 없으면 랜덤 선택
     const filtered = mockRestaurants.filter((r) =>
       r.category.includes(category)

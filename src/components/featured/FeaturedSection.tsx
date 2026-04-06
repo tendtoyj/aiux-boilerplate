@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import CardCarousel from "@/components/carousel/CardCarousel";
 import { magazines } from "@/data/mock";
 
@@ -15,10 +16,12 @@ export default function FeaturedSection() {
         >
           {/* Image */}
           <div className="relative aspect-[16/9]">
-            <img
+            <Image
               src={mag.imageUrl}
               alt={mag.title}
-              className="w-full h-full object-cover"
+              fill
+              sizes="(max-width: 768px) 100vw, 40vw"
+              className="object-cover"
             />
             {/* Gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />

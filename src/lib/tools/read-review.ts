@@ -49,7 +49,7 @@ export const readReview = tool({
       .optional()
       .describe("특정 레스토랑 ID, 없으면 전체 리뷰"),
   }),
-  execute: async ({ userId, restaurantId }) => {
+  execute: async ({ restaurantId }) => {
     if (restaurantId) {
       const filtered = mockReviews.filter((r) =>
         r.restaurantName.includes(restaurantId)

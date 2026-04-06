@@ -22,7 +22,7 @@ export const showTaste = tool({
   inputSchema: z.object({
     userId: z.string().describe("사용자 ID"),
   }),
-  execute: async ({ userId }) => {
+  execute: async () => {
     return {
       scores: {
         spicy: 78,

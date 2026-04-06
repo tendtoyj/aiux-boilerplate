@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import type { ShowRestaurantOutput } from "@/lib/tools/show-restaurant";
 import { Star } from "lucide-react";
 
@@ -15,9 +16,11 @@ export default function RestaurantCards({
           key={i}
           className="flex gap-3 p-2.5 rounded-xl bg-white border border-gray-100 shadow-sm"
         >
-          <img
+          <Image
             src={r.photoUrl}
             alt={r.name}
+            width={64}
+            height={64}
             className="w-16 h-16 rounded-lg object-cover shrink-0"
           />
           <div className="flex-1 min-w-0">

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Typography, Card, CardThumbnail, CardTitle, CardCaption } from "@montage-ui/core";
 import { IconChevronRight } from "@montage-ui/icon";
 import { themeCategories } from "@/data/mock";
@@ -20,9 +21,12 @@ export default function ThemeCardSection() {
         {themeCategories.map((theme) => (
           <Card key={theme.id} platform="desktop" style={{ cursor: "pointer" }}>
             <CardThumbnail ratio="3:2">
-              <img
+              <Image
                 src={theme.imageUrl}
                 alt={theme.label}
+                width={400}
+                height={260}
+                sizes="(max-width: 768px) 50vw, 25vw"
                 className="w-full h-full object-cover rounded-t-xl"
               />
             </CardThumbnail>

@@ -79,7 +79,7 @@ export const readHistory = tool({
       .enum(["1week", "1month", "3months"])
       .describe("조회 기간 (1week, 1month, 3months)"),
   }),
-  execute: async ({ userId, period }) => {
+  execute: async ({ period }) => {
     const days = periodDays[period] ?? 30;
     const cutoff = new Date();
     cutoff.setDate(cutoff.getDate() - days);

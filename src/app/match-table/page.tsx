@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Card, CardThumbnail, CardTitle, CardCaption, ContentBadge } from "@montage-ui/core";
 import GlobalNavBar from "@/components/gnb/GlobalNavBar";
 import QuickMenu from "@/components/quick-menu/QuickMenu";
@@ -27,9 +28,12 @@ export default function MatchTablePage() {
             >
               <Card platform="desktop" style={{ cursor: "pointer" }}>
                 <CardThumbnail ratio="4:3">
-                  <img
+                  <Image
                     src={r.imageUrl}
                     alt={r.name}
+                    width={400}
+                    height={300}
+                    sizes="(max-width: 768px) 50vw, 200px"
                     className="w-full h-full object-cover rounded-t-xl"
                   />
                   {r.discount && (
@@ -80,9 +84,12 @@ export default function MatchTablePage() {
             >
               <Card platform="desktop" style={{ cursor: "pointer" }}>
                 <CardThumbnail ratio="4:3">
-                  <img
+                  <Image
                     src={r.imageUrl}
                     alt={r.name}
+                    width={400}
+                    height={300}
+                    sizes="(max-width: 768px) 50vw, 200px"
                     className="w-full h-full object-cover rounded-t-xl"
                   />
                   {r.discount && (

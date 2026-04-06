@@ -1,4 +1,4 @@
-import { Typography, Divider, FlexBox } from "@montage-ui/core";
+import { Typography, Divider } from "@montage-ui/core";
 
 export default function AppFooter() {
   return (
@@ -26,7 +26,7 @@ export default function AppFooter() {
         </div>
 
         <div className="py-3">
-          <Divider />
+          <Divider color="semantic.line.normal.alternative" />
         </div>
 
         <Typography variant="caption2" color="semantic.label.assistive">

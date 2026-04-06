@@ -43,6 +43,9 @@ export const quickMenuItems: QuickMenuItem[] = [
   { id: "7", label: "할인·쿠폰", icon: "coupon", color: "#F97316" },
   { id: "10", label: "에디터 추천", icon: "coffee", color: "#D946EF" },
   { id: "11", label: "맛집 랭킹", icon: "chart", color: "#06B6D4" },
+  { id: "12", label: "저장한 맛집", icon: "favorite", color: "#EF4444" },
+  { id: "13", label: "매거진", icon: "magazine", color: "#10B981" },
+  { id: "14", label: "후기 작성", icon: "pencil", color: "#6366F1" },
 ];
 
 // ─── Trending Restaurants (지금 뜨는 맛집) ───

@@ -7,6 +7,9 @@ import bookingIcon from "@/assets/booking.png";
 import couponIcon from "@/assets/coupon.png";
 import coffeeIcon from "@/assets/coffee.png";
 import chartIcon from "@/assets/chart.png";
+import favoriteIcon from "@/assets/favorite.png";
+import magazineIcon from "@/assets/magazine.png";
+import pencilIcon from "@/assets/pencil.png";
 import type { StaticImageData } from "next/image";
 
 const iconMap: Record<string, StaticImageData> = {
@@ -16,12 +19,15 @@ const iconMap: Record<string, StaticImageData> = {
   coupon: couponIcon,
   coffee: coffeeIcon,
   chart: chartIcon,
+  favorite: favoriteIcon,
+  magazine: magazineIcon,
+  pencil: pencilIcon,
 };
 
 export default function QuickMenu() {
   return (
     <section className="py-8">
-      <FlexBox justifyContent="center" gap={16} flexWrap="wrap">
+      <FlexBox justifyContent="center" gap={4} flexWrap="wrap">
         {quickMenuItems.map((item) => (
           <div
             key={item.id}
@@ -32,8 +38,8 @@ export default function QuickMenu() {
               <Image
                 src={iconMap[item.icon]}
                 alt={item.label}
-                width={48}
-                height={48}
+                width={56}
+                height={56}
               />
             </div>
             <Typography variant="caption1" weight="medium" color="semantic.label.alternative" align="center">

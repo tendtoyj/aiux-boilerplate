@@ -1,0 +1,34 @@
+{
+  "/": [
+    {
+      "id": "1",
+      "author": "유정",
+      "text": "랜딩 허브는 프로토타입 진입점. 팀 노트는 page.tsx의 collabNotes에서 직접 관리.",
+      "timestamp": "26/04/08(화) 오후"
+    }
+  ],
+  "/match-table": [
+    {
+      "id": "1",
+      "author": "유정",
+      "text": "원티드 홈페이지 구조 기반. GNB, 퀵메뉴, 캐러셀, 매거진, 테마, 근처 맛집 섹션.",
+      "timestamp": "26/04/08(화) 오후"
+    }
+  ],
+  "/match-table/taste-profile": [
+    {
+      "id": "1",
+      "author": "유정",
+      "text": "사용자 입맛 프로필 페이지. AI 채팅에서 도구 호출로도 접근 가능.",
+      "timestamp": "26/04/08(화) 오후"
+    }
+  ],
+  "/ai-chat": [
+    {
+      "id": "1",
+      "author": "유정",
+      "text": "Vercel AI SDK 기반 플로팅 채팅. 도구 설정 토글 패널 포함.",
+      "timestamp": "26/04/08(화) 오후"
+    }
+  ]
+}

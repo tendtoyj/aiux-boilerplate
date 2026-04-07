@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "wanted-sans/fonts/webfonts/variable/complete/WantedSansVariable.css";
 import Providers from "./providers";
+import FloatingMenu from "@/components/floating-menu";
 
 export const metadata: Metadata = {
   title: "Match Table",
@@ -16,7 +17,10 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <FloatingMenu />
+        </Providers>
       </body>
     </html>
   );

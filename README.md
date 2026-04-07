@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI-UX Boilerplate
 
-## Getting Started
+AI-UX 수업용 프로토타입 boilerplate입니다. Fork하여 자신만의 입맛 프로필을 만들어보세요.
 
-First, run the development server:
+## 시작하기
+
+### 1. 레포 Fork & Clone
+
+GitHub에서 이 레포를 **Fork**한 후 로컬에 clone합니다.
+
+```bash
+git clone https://github.com/<내-아이디>/aiux-boilerplate.git
+cd aiux-boilerplate
+```
+
+### 2. Node.js 설치 확인
+
+Node.js **18 이상**이 필요합니다. 터미널에서 버전을 확인하세요.
+
+```bash
+node -v
+```
+
+Node.js가 없거나 버전이 낮으면 [nodejs.org](https://nodejs.org/)에서 LTS 버전을 설치하세요.
+
+> nvm을 사용하는 경우 `nvm install` 만 실행하면 `.nvmrc`에 지정된 버전이 자동 설치됩니다.
+
+### 3. 의존성 설치
+
+```bash
+npm install
+```
+
+### 4. API 키 설정
+
+AI 기능을 사용하려면 API 키가 필요합니다.
+
+```bash
+cp .env.example .env.local
+```
+
+`.env.local` 파일을 열고, 사용할 AI 서비스의 키를 입력하세요. 하나만 있으면 됩니다.
+
+| 서비스 | 환경변수 | 키 발급 |
+|--------|---------|---------|
+| OpenAI | `OPENAI_API_KEY` | [platform.openai.com](https://platform.openai.com/api-keys) |
+| Google | `GOOGLE_GENERATIVE_AI_API_KEY` | [aistudio.google.com](https://aistudio.google.com/apikey) |
+| Anthropic | `ANTHROPIC_API_KEY` | [console.anthropic.com](https://console.anthropic.com/) |
+
+### 5. 개발 서버 실행
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[http://localhost:3000](http://localhost:3000) 에서 확인할 수 있습니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 기술 스택
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Next.js](https://nextjs.org/) 16 (App Router)
+- [React](https://react.dev/) 19
+- [Tailwind CSS](https://tailwindcss.com/) v4
+- [Montage UI](https://montage-ui.com/)
+- [Vercel AI SDK](https://sdk.vercel.ai/)

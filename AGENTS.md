@@ -89,3 +89,77 @@ template 레포의 LandingPage 패턴을 따른다:
 1. `src/app/(프로토타입명)/page.tsx` 생성
 2. 랜딩 허브의 Dev 섹션에 `EntryButton` 추가 (variant를 `coming-soon`에서 `default`로 변경)
 3. 프로토타입별 컴포넌트는 해당 라우트 폴더 또는 `src/components/` 하위에 배치
+4. 플로팅 메뉴에 페이지 등록: `src/components/floating-menu/menu-config.ts`의 `allPages` 배열에 추가
+
+# 플로팅 메뉴 (`FloatingMenu`)
+
+모든 페이지에 글로벌로 렌더링되는 드래그 가능한 플로팅 버튼 + 패널 컴포넌트. 페이지 간 빠른 이동과 페이지별 메모를 제공한다.
+
+## 파일 구조
+
+```
+src/components/floating-menu/
+├── index.tsx             ← 클라이언트 래퍼 (dynamic import, ssr: false)
+├── FloatingMenu.tsx      ← 메인 컴포넌트 (드래그 FAB + 패널 + 탭)
+├── PageNavList.tsx       ← 탭1: 페이지 링크 목록
+├── PageNotes.tsx         ← 탭2: 페이지별 메모 (조회/작성/삭제)
+└── menu-config.ts        ← 페이지 링크 설정
+
+src/data/
+└── floating-menu-notes.json  ← 메모 데이터 (API가 읽고 씀)
+
+src/app/api/floating-menu-notes/
+└── route.ts              ← 메모 CRUD API (GET/POST/DELETE)
+```
+
+## 사용 방법
+
+### FAB 버튼
+- **클릭**: 패널 열기/닫기
+- **드래그**: 화면 아무 곳으로 이동 가능 (위치는 localStorage에 저장, 새로고침해도 유지)
+
+### 패널 탭
+- **페이지 탭**: 등록된 프로토타입 페이지 목록. 클릭 시 같은 탭에서 이동. 현재 페이지는 "현재" 표시로 하이라이트.
+- **메모 탭**: 현재 페이지에 대한 메모 조회/작성/삭제. 메모는 `src/data/floating-menu-notes.json`에 저장되며 git으로 팀 공유 가능.
+
+### 숨기기/복원
+- 패널 헤더의 눈 아이콘(EyeOff)으로 숨기기
+- 숨기면 화면 오른쪽 가장자리에 얇은 미니 탭이 남음 → 클릭하면 FAB 복원
+
+## 페이지 목록 관리 (`menu-config.ts`)
+
+`allPages` 배열에 페이지를 추가/수정한다:
+
+```ts
+const allPages: PageEntry[] = [
+  { label: "랜딩 허브", path: "/", description: "프로토타입 탐색 메인" },
+  { label: "Match Table", path: "/match-table", description: "레스토랑 디스커버리" },
+  // 새 페이지 추가 시 여기에 추가
+];
+```
+
+페이지별로 다른 링크 목록을 보여주려면 `pageConfigs`에 경로별 설정을 추가한다. 미설정 경로는 `default`(= `allPages`)를 사용.
+
+## 메모 관리
+
+### UI에서 작성
+1. FAB 클릭 → 메모 탭 선택
+2. 하단 입력 폼에 메모 작성 → Enter 또는 전송 버튼
+3. 작성자 이름은 우상단에서 설정 (localStorage에 기억)
+4. 각 메모 hover 시 휴지통 아이콘으로 삭제
+
+### JSON 파일 직접 편집
+`src/data/floating-menu-notes.json`을 직접 수정해도 된다. 경로를 키로, 메모 배열을 값으로 관리:
+
+```json
+{
+  "/match-table": [
+    { "id": "1", "author": "유정", "text": "메모 내용", "timestamp": "26/04/08(화) 오후" }
+  ]
+}
+```
+
+### API 엔드포인트
+- `GET /api/floating-menu-notes` — 전체 메모 조회
+- `POST /api/floating-menu-notes` — 메모 추가 (`{ pathname, text, author }`)
+- `DELETE /api/floating-menu-notes` — 메모 삭제 (`{ pathname, noteId }`)

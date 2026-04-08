@@ -44,7 +44,7 @@
 
 | Feature | 폴더 | 현재 상태 | 마지막 작업 |
 |---------|------|----------|------------|
-| taste-profile | ux-output/taste-profile/ | Screen Plan 완료 (Flow 1, Desktop Web, 2화면) | 2026-04-08 |
+| taste-profile | ux-output/taste-profile/ | User Flow 진행 중 (Flow 1 완료, 4개 중 1개) | 2026-04-08 |
 
 ## 진행 중인 Research
 

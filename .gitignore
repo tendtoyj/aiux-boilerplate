@@ -43,6 +43,3 @@ next-env.d.ts
 
 # docs
 /thoughts
-
-# ux-output: taste-profile 제외
-ux-output/taste-profile/

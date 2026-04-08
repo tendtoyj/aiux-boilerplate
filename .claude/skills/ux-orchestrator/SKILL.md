@@ -55,9 +55,19 @@ ux-memory/
 | `ideas.md` | brainstorming-guide | ✅ / ❌ / N/A (value path) |
 | `persona.md` | persona-maker | ✅ / ❌ |
 | `user-flows.md` | userflow-generator | ✅ / ❌ |
-| `screen-plan.md` | screen-planner | ✅ / ❌ |
-| `design-plan.md` | design-plan | ✅ / ❌ |
+| `screen-plans/` | screen-planner | ✅ N개 / ❌ |
+| `designs/*/design-plan.md` | design-plan | ✅ N개 / ❌ |
+| `designs/*/design-implement.md` | design-implement | ✅ N개 / ❌ |
 
+**Research 폴더 스캔:**
+
+각 `ux-output/research/{research-name}/` 폴더에서:
+
+| 파일 | 생성 스킬 | 상태 |
+|------|----------|------|
+| `research-plan.md` | ur-planner | ✅ / ❌ |
+| `survey.md` | survey-maker | ✅ / ❌ |
+| `interview-guide.md` | interview-helper | ✅ / ❌ |
 
 ### Step 3 — 상태 리포트 생성
 
@@ -71,10 +81,14 @@ ux-memory/
 
 ### Feature 진행 상황
 - ✅ onboarding-flow
-  Brainstorming ✅ → Userflow ✅ → Screen Plan ❌
+  Brainstorming ✅ → Userflow ✅ → Screen Plans ❌ → Design Plans ❌ → Design Implements ❌
   
 - ✅ search-redesign
   Brainstorming ✅ → Persona ✅ → Userflow ❌
+
+### Research 진행 상황
+- ✅ onboarding-research
+  UR Plan ✅ → Survey ✅ → Interview Guide ❌
 
 ### 아직 시작하지 않은 작업
 - ❌ 신규 Feature나 Research가 없습니다.
@@ -95,6 +109,7 @@ ux-memory/
 
 - **새 기능 기획** — 새로운 Feature를 브레인스토밍부터 시작하고 싶어요
 - **기존 기능 이어서** — 진행 중인 Feature의 다음 단계를 하고 싶어요
+- **사용자 리서치** — 리서치 계획을 세우거나, 설문/인터뷰를 준비하고 싶어요
 - **모르겠어요** — 뭐부터 하면 좋을지 알려주세요
 ```
 
@@ -106,6 +121,7 @@ Feature나 Research가 여러 개 진행 중인 경우:
 어떤 Feature/Research를 이어서 하고 싶으세요?
 - onboarding-flow (Brainstorming ✅ → Userflow ✅)
 - search-redesign (Brainstorming ✅ → Persona ✅)
+- onboarding-research (UR Plan ✅ → Survey ✅)
 ```
 
 ---
@@ -127,15 +143,42 @@ Step 2: USERFLOW
 
 Step 3: SCREEN PLAN
   → /ux-skills:screen-planner
-  → 저장: ux-output/{feature}/screen-plan.md
+  → 저장: ux-output/{feature}/screen-plans/NN_{flow-name}.md
 
-Step 4: DESIGN IMPLEMENT (선택)
+Step 4: DESIGN PLAN (선택)
   → /ux-skills:design-plan
-  → 저장: ux-output/{feature}/design-plan.md
+  → 저장: ux-output/{feature}/designs/NN_{screen-name}/design-plan.md
   → 디자인 스크린샷이 있을 때, 디자인 시스템 매핑 & 갭 분석
+
+Step 5: DESIGN IMPLEMENT (선택)
+  → /ux-skills:design-implement
+  → 저장: ux-output/{feature}/designs/NN_{screen-name}/design-implement.md
+  → design-plan이 있을 때, 시각적 프론트엔드 구현
 ```
 
-### Route B: 사용자 중심 설계
+### Route B: 리서치 연결
+
+**조건**: 기능 방향을 잡은 후 사용자 검증이 필요할 때
+
+```
+Step 1: BRAINSTORMING
+  → /ux-skills:brainstorming-guide
+  → 저장: ux-output/{feature}/pain-points.md + ideas.md (pain path) 또는 ux-values.md (value path)
+
+Step 2: USERFLOW
+  → /ux-skills:userflow-generator
+  → 저장: ux-output/{feature}/user-flows.md
+
+Step 3: UR PLAN
+  → /ux-skills:ur-planner
+  → 저장: ux-output/research/{research}/research-plan.md
+
+Step 4: SURVEY / INTERVIEW
+  → /ux-skills:survey-maker 또는 /ux-skills:interview-helper
+  → 저장: ux-output/research/{research}/survey.md 또는 interview-guide.md
+```
+
+### Route C: 사용자 중심 설계
 
 **조건**: 페르소나를 기반으로 설계를 진행하고 싶을 때
 
@@ -154,14 +197,36 @@ Step 3: USERFLOW
 
 Step 4: SCREEN PLAN
   → /ux-skills:screen-planner
-  → 저장: ux-output/{feature}/screen-plan.md
+  → 저장: ux-output/{feature}/screen-plans/NN_{flow-name}.md
 
-Step 5: DESIGN IMPLEMENT (선택)
+Step 5: DESIGN PLAN (선택)
   → /ux-skills:design-plan
-  → 저장: ux-output/{feature}/design-plan.md
+  → 저장: ux-output/{feature}/designs/NN_{screen-name}/design-plan.md
+
+Step 6: DESIGN IMPLEMENT (선택)
+  → /ux-skills:design-implement
+  → 저장: ux-output/{feature}/designs/NN_{screen-name}/design-implement.md
 ```
 
-### Route D: 기존 작업 이어서
+### Route D: 리서치 우선
+
+**조건**: 아이디어 검증을 위한 리서치부터 시작하고 싶을 때
+
+```
+Step 1: BRAINSTORMING
+  → /ux-skills:brainstorming-guide
+  → 저장: ux-output/{feature}/pain-points.md + ideas.md (pain path) 또는 ux-values.md (value path)
+
+Step 2: UR PLAN
+  → /ux-skills:ur-planner
+  → 저장: ux-output/research/{research}/research-plan.md
+
+Step 3: SURVEY / INTERVIEW
+  → /ux-skills:survey-maker 또는 /ux-skills:interview-helper
+  → 저장: ux-output/research/{research}/survey.md 또는 interview-guide.md
+```
+
+### Route E: 기존 작업 이어서
 
 **조건**: 이미 진행 중인 Feature나 Research의 다음 단계
 
@@ -169,16 +234,18 @@ Step 5: DESIGN IMPLEMENT (선택)
 
 | 현재 상태 | 추천 다음 스킬 |
 |----------|--------------|
-| Brainstorming만 완료 | Userflow Generator 또는 Persona Maker |
+| Brainstorming만 완료 | Userflow Generator 또는 Persona Maker 또는 UR Plan |
 | Brainstorming + Persona 완료 | Userflow Generator |
-| Brainstorming + Userflow 완료 | Screen Planner |
-| Brainstorming + Userflow + Screen Plan 완료 | Design Implement (스크린샷 있을 때) |
+| Brainstorming + Userflow 완료 | Screen Planner 또는 UR Plan |
+| Brainstorming + Userflow + Screen Plan 완료 | Design Plan (디자인 스크린샷 있을 때) |
+| Brainstorming + Userflow + Screen Plan + Design Plan 완료 | Design Implement |
+| UR Plan만 완료 | Survey Maker 또는 Interview Helper |
 
 다음 스킬이 여러 개 가능한 경우, 선택지를 제시하고 사용자가 고르도록 한다:
 
 > "유저플로우까지 완성되었네요. 다음은 어떤 방향으로 가실래요?"
 > 1. **Screen Planner** — 바로 화면 설계로 넘어가기
-> 2. **Persona Maker** — 사용자 페르소나를 먼저 정의하기
+> 2. **UR Plan** — 설계 전에 사용자 검증 계획 세우기
 
 ---
 
@@ -202,7 +269,8 @@ Step 5: DESIGN IMPLEMENT (선택)
 [스킬 실행 프롬프트]
 
 ## 전체 로드맵
-[Feature명]:  ✅ Brainstorming → ✅ Userflow → → Screen Plan (현재 단계)
+[Feature명]:  ✅ Brainstorming → ✅ Userflow → → Screen Plans (현재 단계) → Design Plans → Design Implements
+[Research명]: ✅ UR Plan → → Survey (현재 단계)
 ```
 
 ### 스킬 실행 프롬프트

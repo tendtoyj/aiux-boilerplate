@@ -31,6 +31,14 @@ const DEFAULT_AUTHOR = "유정";
 // 메모 데이터 (최신순)
 const collabNotes: CollabNote[] = [
   {
+    id: "6",
+    author: DEFAULT_AUTHOR,
+    message:
+      "에이전트용 Montage UI 카탈로그 추가 (docs/montage-catalog.md). 컴포넌트 + 디자인 토큰 참조용.",
+    timestamp: "26/04/08(화) 오후",
+    badge: "info",
+  },
+  {
     id: "5",
     author: DEFAULT_AUTHOR,
     message:
@@ -330,21 +338,6 @@ export default function LandingPage() {
 
         <div className="max-w-5xl mx-auto space-y-6">
           {/* ==================== PROJECT DOCUMENTS ==================== */}
-          <div className="p-5 rounded-xl bg-white border border-gray-100 shadow-sm">
-            <SectionHeader
-              icon={<FileText className="w-4 h-4" />}
-              title="Project Documents"
-            />
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              <EntryButton
-                icon={<FileText className="w-4 h-4 text-blue-600" />}
-                title="구현 계획서"
-                description="Match Table 메인 페이지 구현 계획"
-                onClick={() => window.open("/docs/plan", "_blank")}
-                variant="coming-soon"
-              />
-            </div>
-          </div>
 
           {/* ==================== HAND OFF ==================== */}
           <div className="p-5 rounded-xl bg-white border border-gray-100 shadow-sm">

@@ -1,3 +1,7 @@
+# Montage UI 참조
+
+Montage UI 컴포넌트나 디자인 토큰을 사용할 때는 `docs/montage-catalog.md`를 먼저 참조한다. node_modules 탐색 전에 이 파일에서 필요한 정보를 찾는다.
+
 <!-- BEGIN:nextjs-agent-rules -->
 # This is NOT the Next.js you know
 

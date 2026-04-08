@@ -54,7 +54,6 @@ description: Analyzes a design (screenshot or Figma link) against the project's 
 
 | 유형 | 예시 | 읽는 방법 |
 |------|------|----------|
-| 카탈로그 문서 | `docs/montage-catalog.md` | Read |
 | 토큰/스타일 코드 | `src/styles/tokens.ts` | Read |
 | 컴포넌트 코드 | `src/components/` | Glob + Read |
 | 디자인 명세 | `design/spec.md` | Read |

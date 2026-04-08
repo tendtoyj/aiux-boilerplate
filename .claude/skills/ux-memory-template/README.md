@@ -22,11 +22,6 @@ your-project/                ← 사용자 작업 디렉토리
 │   │   ├── user-flows.md    ← userflow-generator
 │   │   └── screen-plan.md   ← screen-planner
 │   │
-│   └── research/            ← 리서치 관련 산출물
-│       └── {research-name}/
-│           ├── research-plan.md    ← ur-planner
-│           ├── survey.md           ← survey-maker
-│           └── interview-guide.md  ← interview-helper
 └── ...
 ```
 
@@ -49,9 +44,6 @@ your-project/                ← 사용자 작업 디렉토리
 - **persona-maker**: `ux-output/{feature}/persona.md` 저장
 - **userflow-generator**: `ux-output/{feature}/user-flows.md` 저장
 - **screen-planner**: `ux-output/{feature}/screen-plan.md` 저장
-- **ur-planner**: `ux-output/research/{research-name}/research-plan.md` 저장
-- **survey-maker**: `ux-output/research/{research-name}/survey.md` 저장
-- **interview-helper**: `ux-output/research/{research-name}/interview-guide.md` 저장
 - **종료 시**: `ux-memory/activity-log.md`에 실행 기록 추가
 
 ### 컨텍스트 관리

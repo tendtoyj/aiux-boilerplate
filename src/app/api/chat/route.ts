@@ -9,12 +9,18 @@ export async function POST(req: Request) {
   const {
     messages,
     toolConfig,
-  }: { messages: UIMessage[]; toolConfig?: Partial<ToolConfig> } =
+    userId,
+  }: { messages: UIMessage[]; toolConfig?: Partial<ToolConfig>; userId?: string } =
     await req.json();
+
+  const basePrompt = loadPrompt("system.md");
+  const system = userId
+    ? `${basePrompt}\n\n현재 로그인한 사용자: ${userId}\n모든 도구 호출 시 이 userId를 사용하세요.`
+    : basePrompt;
 
   const result = streamText({
     model: getModel(),
-    system: loadPrompt("system.md"),
+    system,
     messages: await convertToModelMessages(messages),
     tools: getEnabledTools(toolConfig),
     stopWhen: stepCountIs(2),

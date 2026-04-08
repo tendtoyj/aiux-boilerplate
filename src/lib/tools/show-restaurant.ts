@@ -1,5 +1,6 @@
 import { tool } from "ai";
 import { z } from "zod";
+import { getUserData, getRestaurantPool, type RestaurantPoolItem } from "@/data/user-mock";
 
 export interface RestaurantItem {
   name: string;
@@ -14,69 +15,89 @@ export interface ShowRestaurantOutput {
   restaurants: RestaurantItem[];
 }
 
-const mockRestaurants: RestaurantItem[] = [
-  {
-    name: "트라토리아 모리",
-    photoUrl: "https://placehold.co/300x200/e8d5b7/333?text=Italian",
-    rating: 4.7,
-    description: "수제 파스타와 화덕 피자가 맛있는 정통 이탈리안",
-    distance: "350m",
-    category: "이탈리안",
-  },
-  {
-    name: "을지로 골목식당",
-    photoUrl: "https://placehold.co/300x200/d4e8d0/333?text=Korean",
-    rating: 4.5,
-    description: "혼밥하기 좋은 아늑한 한식 백반집",
-    distance: "120m",
-    category: "한식",
-  },
-  {
-    name: "스시오마카세 하루",
-    photoUrl: "https://placehold.co/300x200/d0d8e8/333?text=Japanese",
-    rating: 4.8,
-    description: "신선한 제철 생선으로 만드는 오마카세 코스",
-    distance: "500m",
-    category: "일식",
-  },
-  {
-    name: "반미 사이공",
-    photoUrl: "https://placehold.co/300x200/e8e0d0/333?text=Vietnamese",
-    rating: 4.3,
-    description: "정통 베트남 반미와 쌀국수 전문점",
-    distance: "200m",
-    category: "베트남",
-  },
-  {
-    name: "버거앤프라이즈",
-    photoUrl: "https://placehold.co/300x200/e8d0d0/333?text=Burger",
-    rating: 4.4,
-    description: "수제 패티와 크래프트 맥주의 조합",
-    distance: "400m",
-    category: "양식",
-  },
-];
+/** 유저 활동 지역과 레스토랑 지역 기반으로 거리 텍스트 생성 */
+function computeDistance(
+  restaurantArea: string,
+  userAreas: string[],
+): string {
+  if (userAreas.includes(restaurantArea)) {
+    // 같은 지역 → 가까운 거리
+    const near = [120, 150, 200, 250, 300];
+    return `${near[Math.floor(Math.random() * near.length)]}m`;
+  }
+  // 다른 지역 → 먼 거리
+  const far = [800, 950, 1100, 1200, 1500];
+  const m = far[Math.floor(Math.random() * far.length)];
+  return m >= 1000 ? `${(m / 1000).toFixed(1)}km` : `${m}m`;
+}
+
+/** RestaurantPoolItem → RestaurantItem 변환 */
+function toRestaurantItem(
+  pool: RestaurantPoolItem,
+  userAreas: string[],
+): RestaurantItem {
+  return {
+    name: pool.name,
+    photoUrl: pool.photoUrl,
+    rating: pool.rating,
+    description: pool.description,
+    distance: computeDistance(pool.area, userAreas),
+    category: pool.category,
+  };
+}
 
 export const showRestaurant = tool({
   description:
     "맛집을 추천합니다. 카테고리, 위치, 분위기를 기반으로 맛집 카드를 보여줍니다.",
   inputSchema: z.object({
     category: z.string().describe("음식 카테고리 (예: 이탈리안, 한식, 일식)"),
-    location: z.string().describe("위치/지역 (예: 강남역, 홍대)"),
+    location: z.string().describe("위치/지역 (예: 강남, 홍대, 성수, 을지로, 여의도)"),
     mood: z
       .string()
       .optional()
-      .describe("분위기/상황 (예: 혼밥, 데이트, 회식)"),
+      .describe("분위기/상황 (예: 혼밥, 데이트, 회식, 브런치, 야식)"),
+    userId: z
+      .string()
+      .optional()
+      .describe("사용자 ID, 전달하면 취향 기반 개인화 추천"),
   }),
-  execute: async ({ category }) => {
-    // 카테고리로 필터링, 없으면 랜덤 선택
-    const filtered = mockRestaurants.filter((r) =>
-      r.category.includes(category)
-    );
-    const results =
-      filtered.length > 0
-        ? filtered.slice(0, 3)
-        : mockRestaurants.slice(0, 3);
+  execute: async ({ category, location, mood, userId }) => {
+    const userData = getUserData(userId ?? "user-001");
+    const userAreas = userData?.favoriteAreas ?? ["강남"];
+    const preferredCats = userData?.taste.preferredCategories ?? [];
+
+    let pool = getRestaurantPool();
+
+    // 1. 카테고리 필터
+    const byCategory = pool.filter((r) => r.category.includes(category));
+    if (byCategory.length > 0) pool = byCategory;
+
+    // 2. 위치 필터 (카테고리 결과 내에서, 매칭 없으면 스킵)
+    if (location) {
+      const byLocation = pool.filter((r) => r.area.includes(location));
+      if (byLocation.length > 0) pool = byLocation;
+    }
+
+    // 3. 분위기 필터 (매칭 없으면 스킵)
+    if (mood) {
+      const byMood = pool.filter((r) =>
+        r.moods.some((m) => m.includes(mood))
+      );
+      if (byMood.length > 0) pool = byMood;
+    }
+
+    // 4. 개인화 정렬: 유저 선호 카테고리/지역 매칭 항목 상위
+    pool.sort((a, b) => {
+      const scoreA =
+        (preferredCats.includes(a.category) ? 2 : 0) +
+        (userAreas.includes(a.area) ? 1 : 0);
+      const scoreB =
+        (preferredCats.includes(b.category) ? 2 : 0) +
+        (userAreas.includes(b.area) ? 1 : 0);
+      return scoreB - scoreA;
+    });
+
+    const results = pool.slice(0, 3).map((r) => toRestaurantItem(r, userAreas));
 
     return { restaurants: results } satisfies ShowRestaurantOutput;
   },

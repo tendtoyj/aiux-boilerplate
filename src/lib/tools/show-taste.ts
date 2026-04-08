@@ -1,5 +1,6 @@
 import { tool } from "ai";
 import { z } from "zod";
+import { getUserData } from "@/data/user-mock";
 
 export interface TasteScores {
   spicy: number;
@@ -22,19 +23,12 @@ export const showTaste = tool({
   inputSchema: z.object({
     userId: z.string().describe("사용자 ID"),
   }),
-  execute: async () => {
+  execute: async ({ userId }) => {
+    const data = getUserData(userId) ?? getUserData("user-001")!;
     return {
-      scores: {
-        spicy: 78,
-        sweet: 45,
-        salty: 62,
-        sour: 30,
-        umami: 85,
-        oily: 55,
-      },
-      preferredCategories: ["일식", "이탈리안", "한식", "베트남"],
-      summary:
-        "감칠맛과 매운맛을 좋아하는 미식가 타입이에요! 일식과 이탈리안을 특히 자주 찾으며, 새로운 맛에 도전하는 것을 즐기는 편입니다.",
+      scores: data.taste.scores,
+      preferredCategories: data.taste.preferredCategories,
+      summary: data.taste.summary,
     } satisfies ShowTasteOutput;
   },
 });

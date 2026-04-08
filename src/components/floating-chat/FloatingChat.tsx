@@ -9,6 +9,7 @@ import {
   toolLabels,
   type ToolConfig,
 } from "@/lib/tools/tool-config";
+import { userPersonas } from "@/data/user-mock";
 
 const GREETING =
   "안녕하세요! Match Table AI 어시스턴트입니다. 무엇을 도와드릴까요?";
@@ -18,6 +19,7 @@ export default function FloatingChat() {
   const [input, setInput] = useState("");
   const [showSettings, setShowSettings] = useState(false);
   const [toolConfig, setToolConfig] = useState<ToolConfig>(defaultToolConfig);
+  const [selectedUserId, setSelectedUserId] = useState("user-001");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const { messages, sendMessage, status } = useChat();
@@ -30,7 +32,7 @@ export default function FloatingChat() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isStreaming) return;
-    sendMessage({ text: input }, { body: { toolConfig } });
+    sendMessage({ text: input }, { body: { toolConfig, userId: selectedUserId } });
     setInput("");
   };
 
@@ -71,28 +73,54 @@ export default function FloatingChat() {
             </div>
           </div>
 
-          {/* Tool Toggle Panel */}
+          {/* Settings Panel */}
           {showSettings && (
-            <div className="px-4 py-2.5 border-b border-gray-100 bg-gray-50">
-              <p className="text-[10px] font-medium text-gray-400 mb-1.5">
-                도구 설정
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                {(Object.keys(toolConfig) as (keyof ToolConfig)[]).map(
-                  (key) => (
+            <div className="px-4 py-2.5 border-b border-gray-100 bg-gray-50 space-y-2.5">
+              {/* User Selector */}
+              <div>
+                <p className="text-[10px] font-medium text-gray-400 mb-1.5">
+                  사용자 선택
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {userPersonas.map((persona) => (
                     <button
-                      key={key}
-                      onClick={() => toggleTool(key)}
+                      key={persona.id}
+                      onClick={() => setSelectedUserId(persona.id)}
                       className={`text-[11px] px-2.5 py-1 rounded-full border transition-colors cursor-pointer ${
-                        toolConfig[key]
+                        selectedUserId === persona.id
                           ? "bg-blue-50 border-blue-200 text-blue-600"
                           : "bg-white border-gray-200 text-gray-400"
                       }`}
+                      title={persona.description}
                     >
-                      {toolLabels[key]}
+                      {persona.name}·{persona.area.split("/")[0]}
                     </button>
-                  )
-                )}
+                  ))}
+                </div>
+              </div>
+
+              {/* Tool Toggles */}
+              <div>
+                <p className="text-[10px] font-medium text-gray-400 mb-1.5">
+                  도구 설정
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {(Object.keys(toolConfig) as (keyof ToolConfig)[]).map(
+                    (key) => (
+                      <button
+                        key={key}
+                        onClick={() => toggleTool(key)}
+                        className={`text-[11px] px-2.5 py-1 rounded-full border transition-colors cursor-pointer ${
+                          toolConfig[key]
+                            ? "bg-blue-50 border-blue-200 text-blue-600"
+                            : "bg-white border-gray-200 text-gray-400"
+                        }`}
+                      >
+                        {toolLabels[key]}
+                      </button>
+                    )
+                  )}
+                </div>
               </div>
             </div>
           )}
